@@ -1,0 +1,100 @@
+package com.shijc.wanandroidkotlin.ui.home.adapter
+
+import android.content.Context
+import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
+import com.shijc.wanandroidkotlin.R
+import com.shijc.wanandroidkotlin.utils.GlideImageLoader
+import com.youth.banner.Banner
+
+
+
+
+
+/**
+ * @Package com.shijc.wanandroidkotlin.ui.home.adapter
+ * @Description:
+ * @author shijiacheng
+ * @date 2019/2/13 下午 4:52
+ * @version V1.0
+ */
+class HomeAdapter(private val context: Context, private val data: List<String>)
+    : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private val BANNER = 0
+    private val NORMAL = 1
+
+    override fun getItemCount(): Int = data.size
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = when (viewType) {
+        BANNER -> {
+            BannerViewHolder(
+                LayoutInflater.from(context).
+                inflate(R.layout.item_home_banner, parent, false))
+        }
+        else -> {
+            RecyclerViewHolder(LayoutInflater.from(context)
+                .inflate(R.layout.item_rv_article, parent, false))
+        }
+
+    }
+
+    /**
+     * 利用kotlin中的when代替Java中的if/else
+     * 返回不同的item类型
+     */
+    override fun getItemViewType(position: Int): Int = when (position) {
+        0 -> {
+            BANNER
+        }
+        else -> {
+            NORMAL
+        }
+    }
+
+    /**
+     * 根据不同的item类型绑定不同的数据
+     */
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (getItemViewType(position)) {
+            BANNER -> {
+                if (holder is BannerViewHolder) {
+                    //设置图片加载器
+                    holder.banner.setImageLoader(GlideImageLoader())
+                    //设置图片集合
+                    val list = ArrayList<Int>()
+                    list.add(R.drawable.bg1)
+                    list.add(R.drawable.bg1)
+                    list.add(R.drawable.bg1)
+                    holder.banner.setImages(list)
+                    //banner设置方法全部调用完毕时最后调用
+                    holder.banner.start()
+                }
+            }
+            else -> {
+                if (holder is RecyclerViewHolder) {
+                    holder?.textView?.text = data[position]
+                    holder.textView.setOnClickListener {
+                        Toast.makeText(context, "click", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    class BannerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        var banner: Banner = view.findViewById(R.id.banner)
+    }
+
+    inner class RecyclerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        var textView: TextView = view.findViewById(R.id.tv_author)
+    }
+
+}
