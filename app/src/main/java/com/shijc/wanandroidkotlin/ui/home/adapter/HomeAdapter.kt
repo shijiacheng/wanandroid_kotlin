@@ -8,11 +8,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.shijc.wanandroidkotlin.R
+import com.shijc.wanandroidkotlin.ui.home.bean.ArticleModel
+import com.shijc.wanandroidkotlin.ui.home.bean.BannerModel
+import com.shijc.wanandroidkotlin.ui.systemtree.bean.SystemTreeResult
 import com.shijc.wanandroidkotlin.utils.GlideImageLoader
+import com.shijc.wanandroidkotlin.utils.TimeUtils
 import com.youth.banner.Banner
-
-
-
 
 
 /**
@@ -22,8 +23,18 @@ import com.youth.banner.Banner
  * @date 2019/2/13 下午 4:52
  * @version V1.0
  */
-class HomeAdapter(private val context: Context, private val data: List<String>)
-    : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class HomeAdapter(
+    private val context: Context,
+    private val data: List<ArticleModel>
+
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private var banner: List<BannerModel.Data> = ArrayList<BannerModel.Data>()
+
+    fun setBanner(banner: List<BannerModel.Data>){
+        this.banner = banner
+        notifyDataSetChanged()
+    }
 
     private val BANNER = 0
     private val NORMAL = 1
@@ -34,12 +45,14 @@ class HomeAdapter(private val context: Context, private val data: List<String>)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = when (viewType) {
         BANNER -> {
             BannerViewHolder(
-                LayoutInflater.from(context).
-                inflate(R.layout.item_home_banner, parent, false))
+                LayoutInflater.from(context).inflate(R.layout.item_home_banner, parent, false)
+            )
         }
         else -> {
-            RecyclerViewHolder(LayoutInflater.from(context)
-                .inflate(R.layout.item_rv_article, parent, false))
+            RecyclerViewHolder(
+                LayoutInflater.from(context)
+                    .inflate(R.layout.item_rv_article, parent, false)
+            )
         }
 
     }
@@ -66,21 +79,32 @@ class HomeAdapter(private val context: Context, private val data: List<String>)
                 if (holder is BannerViewHolder) {
                     //设置图片加载器
                     holder.banner.setImageLoader(GlideImageLoader())
-                    //设置图片集合
-                    val list = ArrayList<Int>()
-                    list.add(R.drawable.bg1)
-                    list.add(R.drawable.bg1)
-                    list.add(R.drawable.bg1)
-                    holder.banner.setImages(list)
+
+                    if (banner.isEmpty()){
+                        holder.banner.setImages(listOf(R.drawable.bg1))
+                    }else{
+                        //设置图片集合
+                        val list = ArrayList<String>()
+                        for (item in banner){
+                            list.add(item.imagePath)
+                        }
+                        holder.banner.setImages(list)
+                    }
                     //banner设置方法全部调用完毕时最后调用
                     holder.banner.start()
                 }
             }
             else -> {
                 if (holder is RecyclerViewHolder) {
-                    holder?.textView?.text = data[position]
-                    holder.textView.setOnClickListener {
-                        Toast.makeText(context, "click", Toast.LENGTH_SHORT).show()
+                    holder?.tvAuthor?.text = data[position-1].author
+                    holder?.tvTime?.text = TimeUtils.long2String(data[position-1].publishTime, TimeUtils.FORMAT_TYPE_1)
+                    holder?.tvContent?.text = data[position-1].title
+                    holder?.tvClassify?.text = data[position-1].superChapterName
+
+                    holder.itemView.setOnClickListener {
+                        if (listener!=null){
+                            listener!!.onItemClick(data[position-1],position-1,it)
+                        }
                     }
                 }
             }
@@ -88,13 +112,20 @@ class HomeAdapter(private val context: Context, private val data: List<String>)
     }
 
 
-
     class BannerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var banner: Banner = view.findViewById(R.id.banner)
     }
 
     inner class RecyclerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var textView: TextView = view.findViewById(R.id.tv_author)
+        var tvAuthor: TextView = view.findViewById(R.id.tv_author)
+        var tvTime: TextView = view.findViewById(R.id.tv_time)
+        var tvContent: TextView = view.findViewById(R.id.tv_content)
+        var tvClassify: TextView = view.findViewById(R.id.tv_classify)
     }
 
+    var listener:ClickListener? = null
+
+    interface ClickListener{
+        fun onItemClick(item: ArticleModel, position:Int, view: View)
+    }
 }
