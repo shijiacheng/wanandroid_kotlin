@@ -2,14 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:padding="16dp"
+              android:layout_height="wrap_content"
+              android:paddingLeft="16dp"
+              android:paddingRight="16dp"
 >
 
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+    android:layout_marginTop="@dimen/padding_middle">
         <TextView
                 android:id="@+id/tv_author"
                 android:layout_weight="1"
@@ -70,9 +72,9 @@
     <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/mainTextGray"
+            android:background="@color/hr"
             android:layout_marginTop="@dimen/padding_middle"
-            android:layout_marginBottom="@dimen/padding_middle"
+
     />
 
 </LinearLayout>
