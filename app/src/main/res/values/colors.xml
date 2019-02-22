@@ -7,4 +7,5 @@
     <color name="themeColor">#008577</color>
     <color name="mainText">#333333</color>
     <color name="mainTextGray">#999999</color>
+    <color name="hr">#ebe9ea</color>
 </resources>
