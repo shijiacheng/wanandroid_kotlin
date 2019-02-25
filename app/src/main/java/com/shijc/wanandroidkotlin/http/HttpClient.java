@@ -13,12 +13,15 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import com.shijc.wanandroidkotlin.R;
+import com.shijc.wanandroidkotlin.common.interceptor.AddCookiesInterceptor;
+import com.shijc.wanandroidkotlin.common.interceptor.ReceivedCookiesInterceptor;
 import com.shijc.wanandroidkotlin.utils.NetworkUtils;
 import com.shijc.wanandroidkotlin.utils.StringUtils;
 import com.shijc.wanandroidkotlin.utils.ToastUtils;
 import com.shijc.wanandroidkotlin.utils.Utils;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,9 +36,6 @@ import retrofit2.Retrofit;
  */
 public class HttpClient {
 
-    /*The certificate's password*/
-    private static final String STORE_PASS = "6666666";
-    private static final String STORE_ALIAS = "666666";
     /*用户设置的BASE_URL*/
     private static String BASE_URL = "";
     /*本地使用的baseUrl*/
@@ -63,10 +63,11 @@ public class HttpClient {
     }
 
     private HttpClient() {
-        //HttpsUtil.SSLParams sslParams = HttpsUtil.getSslSocketFactory(Utils.getContext(), R.raw.cer,STORE_PASS , STORE_ALIAS);
         okHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(10000L, TimeUnit.MILLISECONDS)
-                .addInterceptor(new LoggerInterceptor(null, true))
+                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                .addInterceptor(new ReceivedCookiesInterceptor())
+                .addInterceptor(new AddCookiesInterceptor())
                 .build();
     }
 
