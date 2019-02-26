@@ -16,13 +16,21 @@ import com.shijc.wanandroidkotlin.utils.Utils
 import android.widget.Toast
 import android.support.v7.widget.Toolbar
 import android.view.View
+import android.view.ViewGroup
+import com.shijc.wanandroidkotlin.ui.account.LoginActivity
+import com.shijc.wanandroidkotlin.ui.collection.CollectionActivity
 import com.shijc.wanandroidkotlin.ui.search.SearchActivity
+import com.shijc.wanandroidkotlin.ui.todo.TodoActivity
+import com.shijc.wanandroidkotlin.ui.website.WebsiteActivity
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.draw_header_layout.*
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navigation:BottomNavigationView
     private lateinit var toolbar:Toolbar
+    private lateinit var llUser:ViewGroup
 
     private lateinit var homeFragment:Fragment
     private var systemTreeFragment:Fragment? =null
@@ -35,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         Utils.init(this)
         initView()
+        initData()
 
         toolbar.inflateMenu(R.menu.menu_main)
         toolbar.setOnMenuItemClickListener {
@@ -48,6 +57,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initView(){
+        llUser = findViewById(R.id.ll_user)
         toolbar = findViewById(R.id.tool_bar)
         navigation = findViewById(R.id.bottom_navigation)
         var fragmentManager = supportFragmentManager
@@ -59,6 +69,17 @@ class MainActivity : AppCompatActivity() {
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         BottomNavigationViewHelper.disableShiftMode(navigation)
+    }
+
+
+    private fun initData(){
+        llUser.setOnClickListener{
+            startActivity(Intent(this@MainActivity,LoginActivity::class.java))
+        }
+
+        ll_collection.setOnClickListener { startActivity(Intent(this@MainActivity,CollectionActivity::class.java)) }
+        ll_website.setOnClickListener { startActivity(Intent(this@MainActivity, WebsiteActivity::class.java)) }
+        ll_todo.setOnClickListener { startActivity(Intent(this@MainActivity, TodoActivity::class.java)) }
     }
 
     lateinit var mContent:Fragment
