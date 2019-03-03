@@ -26,19 +26,10 @@ class CollectionActivity : AppCompatActivity() {
         presenter = CollectionPresenter()
         presenter.attachView(mView)
 
-        initView()
         initData()
     }
 
-    private fun initView(){
-        setSupportActionBar(tool_bar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true);//左侧添加一个默认的返回图标
-        supportActionBar?.setHomeButtonEnabled(true); //设置返回键可用
-
-    }
-
     private fun initData(){
-        tool_bar.setNavigationOnClickListener{ finish() }
         recycler_view.layoutManager = LinearLayoutManager(this)
         adapter = CollectionAdapter(this!!,mDatas)
 //        adapter.listener = object : CollectionAdapter.ClickListener{

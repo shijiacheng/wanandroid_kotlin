@@ -10,7 +10,6 @@ import android.widget.TextView
 import android.widget.Toast
 import com.shijc.wanandroidkotlin.R
 import com.shijc.wanandroidkotlin.ui.home.bean.ArticleModel
-import com.shijc.wanandroidkotlin.utils.StringUtils
 import com.shijc.wanandroidkotlin.utils.TimeUtils
 
 /**
@@ -31,12 +30,10 @@ class CollectionAdapter(private val context:Context, private val data:List<Artic
     override fun onBindViewHolder(holder: CollectionViewHolder, position: Int) {
 
         if (holder is CollectionViewHolder) {
-            holder?.tvAuthor?.text = "作者："+data[position].author
-            holder?.tvTime?.text = "收藏时间："+TimeUtils.long2String(data[position].publishTime, TimeUtils.FORMAT_TYPE_1)
+            holder?.tvAuthor?.text = data[position].author
+            holder?.tvTime?.text = TimeUtils.long2String(data[position].publishTime, TimeUtils.FORMAT_TYPE_1)
             holder?.tvContent?.text = data[position].title
-            if (!StringUtils.isEmpty(data[position].chapterName)){
-                holder?.tvClassify?.text = "分类：" + data[position].chapterName
-            }
+            holder?.tvClassify?.text = data[position].superChapterName
 
             holder.itemView.setOnClickListener {
                 Toast.makeText(context, "click", Toast.LENGTH_SHORT).show()
