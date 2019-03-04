@@ -1,6 +1,8 @@
 package com.shijc.wanandroidkotlin
 
 import android.app.Application
+import android.content.Context
+import android.support.multidex.MultiDex
 import kotlin.properties.Delegates
 
 /**
@@ -22,13 +24,10 @@ class AppContext:Application(){
     }
 
 
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
+    }
 
 
-//    companion object {
-//        var instance: AppContext by Delegates.notNull()
-//    }
-//    override fun onCreate() {
-//        super.onCreate()
-//        instance = this
-//    }
 }
