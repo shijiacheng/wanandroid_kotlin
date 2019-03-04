@@ -1,6 +1,7 @@
 package com.shijc.wanandroidkotlin.ui.account.mvp
 
 import com.shijc.wanandroidkotlin.api.Apis
+import com.shijc.wanandroidkotlin.common.base.Preference
 import com.shijc.wanandroidkotlin.common.mvp.IView
 import com.shijc.wanandroidkotlin.http.DataType
 import com.shijc.wanandroidkotlin.http.HttpClient
@@ -28,6 +29,7 @@ class LoginPresenter:LoginContract.Presenter{
             .build()
         client.post(object : OnResultListener<LoginReuslt>() {
             override fun onSuccess(result: LoginReuslt?) {
+
                 mView?.onLoginResult(result!!)
             }
             override fun onError(code: Int, message: String) {

@@ -8,6 +8,19 @@ package com.shijc.wanandroidkotlin.ui.account.bean
  * @version V1.0
  */
 
-class LoginReuslt{
-
+data class LoginReuslt(
+    val `data`: Data,
+    val errorCode: Int,
+    val errorMsg: String
+){
+    data class Data(
+        val email: String,
+        val icon: String,
+        val id: Int,
+        val password: String,
+        val token: String,
+        val type: Int,
+        val username: String
+    )
 }
+

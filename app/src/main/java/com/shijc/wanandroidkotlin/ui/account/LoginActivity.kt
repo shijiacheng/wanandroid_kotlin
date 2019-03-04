@@ -3,6 +3,7 @@ package com.shijc.wanandroidkotlin.ui.account
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.shijc.wanandroidkotlin.R
+import com.shijc.wanandroidkotlin.common.base.Preference
 import com.shijc.wanandroidkotlin.ui.account.bean.LoginReuslt
 import com.shijc.wanandroidkotlin.ui.account.mvp.LoginContract
 import com.shijc.wanandroidkotlin.ui.account.mvp.LoginPresenter
@@ -12,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var mPresenter: LoginPresenter;
+    private var userNamePref: String by Preference("userName", "")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,14 +33,20 @@ class LoginActivity : AppCompatActivity() {
         tool_bar.setNavigationOnClickListener{ finish() }
 
         btn_login.setOnClickListener {
-            val username = til_username.editText?.text.toString()
-            val password = til_password.editText?.text.toString()
+            val username = tie_username?.text.toString()
+            val password = tie_password?.text.toString()
             mPresenter.login(username,password)
         }
     }
 
     private val mView = object : LoginContract.View{
         override fun onLoginResult(result: LoginReuslt) {
+            if (result.errorCode == 0){
+                userNamePref = result.data.username
+                finish()
+            }else{
+
+            }
         }
 
         override fun error(code: Int, msg: String) {
