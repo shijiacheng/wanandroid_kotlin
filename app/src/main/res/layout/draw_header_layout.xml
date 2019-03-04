@@ -35,9 +35,10 @@ android:background="#ffffff">
                     android:layout_centerInParent="true"/>
 
             <TextView
+                    android:id="@+id/tv_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="shijiacheng"
+                    android:text="未登录"
                     android:textColor="@color/mainText"
                     android:textStyle="bold"
                     android:textSize="@dimen/font_h4"
