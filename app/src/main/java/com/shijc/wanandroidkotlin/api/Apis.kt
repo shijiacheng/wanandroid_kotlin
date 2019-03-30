@@ -30,9 +30,9 @@ class Apis {
         // 搜索热词
         const val SEARCH_HOT_WORD = "http://www.wanandroid.com//hotkey/json";
         // 搜索结果
-        const val SEARCH_RESULT = "http://www.wanandroid.com/article/query/";
+        const val SEARCH_RESULT = "https://www.wanandroid.com/article/query/";
         // 用户登录
-        const val USER_LOGIN = "http://www.wanandroid.com/user/login";
+        const val USER_LOGIN = "https://www.wanandroid.com/user/login";
         // 用户注册
         const val USER_REGISTER = "http://www.wanandroid.com/user/register";
         // 收藏列表

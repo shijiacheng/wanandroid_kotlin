@@ -3,17 +3,21 @@ package com.shijc.wanandroidkotlin.ui.account
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.shijc.wanandroidkotlin.R
+import com.shijc.wanandroidkotlin.common.base.MessageEvent
 import com.shijc.wanandroidkotlin.common.base.Preference
+import com.shijc.wanandroidkotlin.common.mvp.BaseActivity
 import com.shijc.wanandroidkotlin.ui.account.bean.LoginReuslt
 import com.shijc.wanandroidkotlin.ui.account.mvp.LoginContract
 import com.shijc.wanandroidkotlin.ui.account.mvp.LoginPresenter
 
 import kotlinx.android.synthetic.main.activity_login.*
+import org.greenrobot.eventbus.EventBus
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
 
     private lateinit var mPresenter: LoginPresenter;
-    private var userNamePref: String by Preference("userName", "")
+    private var userNamePref: String by Preference(this,"userName", "")
+    private var passWordPref: String by Preference(this,"passWord", "")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +47,8 @@ class LoginActivity : AppCompatActivity() {
         override fun onLoginResult(result: LoginReuslt) {
             if (result.errorCode == 0){
                 userNamePref = result.data.username
+                passWordPref = tie_password?.text.toString()
+                EventBus.getDefault().post(MessageEvent(1,userNamePref))
                 finish()
             }else{
 
