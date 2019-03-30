@@ -85,13 +85,23 @@ class HomeAdapter(
                     }else{
                         //设置图片集合
                         val list = ArrayList<String>()
+                        val titles = ArrayList<String>()
                         for (item in banner){
                             list.add(item.imagePath)
+                            titles.add(item.title)
                         }
                         holder.banner.setImages(list)
+                        holder.banner.setBannerTitles(titles)
+
+                        holder.banner.setOnBannerListener {
+                            if (listener!=null){
+                                listener!!.onBannerClick(banner[it],it)
+                            }
+                        }
                     }
                     //banner设置方法全部调用完毕时最后调用
                     holder.banner.start()
+
                 }
             }
             else -> {
@@ -126,6 +136,7 @@ class HomeAdapter(
     var listener:ClickListener? = null
 
     interface ClickListener{
+        fun onBannerClick(item: BannerModel.Data,position: Int);
         fun onItemClick(item: ArticleModel, position:Int, view: View)
     }
 }

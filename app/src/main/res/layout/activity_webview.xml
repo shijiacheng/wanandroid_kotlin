@@ -5,7 +5,17 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.WebviewActivity">
+        tools:context=".ui.WebviewActivity"
+android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?colorPrimary"
+            android:elevation="4dp"
+            app:titleTextColor="@color/mainText"
+    />
 
     <FrameLayout
                  android:layout_width="match_parent"
@@ -19,7 +29,7 @@
 
         <ProgressBar
                 android:id="@+id/progressbar"
-                style="@android:style/Widget.ProgressBar.Horizontal"
+                style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
                 android:max="100"

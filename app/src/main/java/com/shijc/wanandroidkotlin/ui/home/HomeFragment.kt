@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.jcodecraeer.xrecyclerview.XRecyclerView
 import com.shijc.wanandroidkotlin.R
 import com.shijc.wanandroidkotlin.api.Apis
+import com.shijc.wanandroidkotlin.common.base.SimpleDividerItemDecoration
 import com.shijc.wanandroidkotlin.ui.home.adapter.HomeAdapter
 import com.shijc.wanandroidkotlin.ui.home.bean.ArticleModel
 import com.shijc.wanandroidkotlin.ui.home.bean.BannerModel
@@ -59,8 +60,13 @@ class HomeFragment : Fragment() {
 
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.addItemDecoration(SimpleDividerItemDecoration(context))
         adapter = HomeAdapter(context!!,mDatas)
         adapter.listener = object :HomeAdapter.ClickListener{
+            override fun onBannerClick(item: BannerModel.Data, position: Int) {
+                UIhelper.openWebView(requireContext(),item.url)
+            }
+
             override fun onItemClick(item: ArticleModel, position: Int, view: View) {
                 UIhelper.openWebView(requireContext(),item.link)
             }

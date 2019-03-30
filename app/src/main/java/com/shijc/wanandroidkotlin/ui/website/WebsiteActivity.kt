@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.shijc.wanandroidkotlin.R
+import com.shijc.wanandroidkotlin.common.mvp.BaseActivity
 import com.shijc.wanandroidkotlin.ui.website.bean.WebsiteReuslt
 import com.shijc.wanandroidkotlin.ui.website.mvp.WebsiteContract
 import com.shijc.wanandroidkotlin.ui.website.mvp.WebsitePresenter
+import com.shijc.wanandroidkotlin.utils.UIhelper
 import kotlinx.android.synthetic.main.activity_website.*
 
-class WebsiteActivity : AppCompatActivity() {
+class WebsiteActivity : BaseActivity() {
     private lateinit var presenter: WebsitePresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,11 +47,15 @@ class WebsiteActivity : AppCompatActivity() {
                 var textView = TextView(this@WebsiteActivity)
                 textView.text= it.name
                 textView.setBackgroundResource(R.drawable.bg_shape_rectangle_gray)
-                textView.setPadding(20,10,20,10)
+                textView.setPadding(40,15,40,15)
 
                 var params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
                 params.setMargins(20,10,20,10)
                 textView.layoutParams = params
+                val link = it.link
+                textView.setOnClickListener {
+                    UIhelper.openWebView(this@WebsiteActivity,link)
+                }
                 fbl_container.addView(textView)
             }
         }

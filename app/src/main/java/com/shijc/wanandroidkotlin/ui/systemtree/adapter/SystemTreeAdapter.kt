@@ -35,7 +35,7 @@ class SystemTreeAdapter(private val context:Context,private val data:List<System
             var textView = TextView(context)
             textView.text= item.name
             textView.setBackgroundResource(R.drawable.bg_shape_rectangle_gray)
-            textView.setPadding(10,10,10,10)
+            textView.setPadding(40,15,40,15)
 
             var params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT)
             params.setMargins(10,10,10,10)

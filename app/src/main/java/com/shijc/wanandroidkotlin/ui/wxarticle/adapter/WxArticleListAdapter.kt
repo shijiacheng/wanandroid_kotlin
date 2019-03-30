@@ -5,12 +5,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
-import com.google.android.flexbox.FlexboxLayout
 import com.shijc.wanandroidkotlin.R
 import com.shijc.wanandroidkotlin.ui.home.bean.ArticleModel
 import com.shijc.wanandroidkotlin.utils.TimeUtils
+import com.shijc.wanandroidkotlin.utils.UIhelper
 
 /**
  * @Package com.shijc.wanandroidkotlin.ui.systemtree.adapter
@@ -33,6 +32,9 @@ class WxArticleListAdapter(private val context:Context, private val data:List<Ar
         holder.tvTitle.text = data[position].title
         holder.tvTime.text = TimeUtils.long2String(data[position].publishTime,TimeUtils.FORMAT_TYPE_1)
 
+        holder.itemView.setOnClickListener {
+            UIhelper.openWebView(context,data[position].link)
+        }
     }
 
     inner class WxArticleListViewHolder(view: View):RecyclerView.ViewHolder(view){

@@ -19,11 +19,13 @@ import com.shijc.wanandroidkotlin.ui.search.mvp.SearchContract
 import com.shijc.wanandroidkotlin.ui.search.mvp.SearchPresenter
 import android.support.v4.view.MenuItemCompat
 import android.support.v7.widget.SearchView
+import android.view.MenuItem
 import android.widget.Toast
+import com.shijc.wanandroidkotlin.common.mvp.BaseActivity
 import com.shijc.wanandroidkotlin.utils.SoftKeyboardUtils
 
 
-class SearchActivity : AppCompatActivity() {
+class SearchActivity : BaseActivity() {
 
     private lateinit var toolbar: Toolbar
     private lateinit var recyclerView: XRecyclerView
@@ -84,6 +86,8 @@ class SearchActivity : AppCompatActivity() {
     private fun initView(){
         toolbar = findViewById(R.id.tool_bar)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true);//左侧添加一个默认的返回图标
+        supportActionBar?.setHomeButtonEnabled(true); //设置返回键可用
         llHotKey = findViewById(R.id.ll_hotkey)
         llResult = findViewById(R.id.ll_result)
         flexContainer = findViewById(R.id.fbl_container)
@@ -125,7 +129,7 @@ class SearchActivity : AppCompatActivity() {
                 var textView = TextView(this@SearchActivity)
                 textView.text= item.name
                 textView.setBackgroundResource(R.drawable.bg_shape_rectangle_gray)
-                textView.setPadding(10,10,10,10)
+                textView.setPadding(40,15,40,15)
                 textView.setOnClickListener {
                     key = item.name
                     searchView.setQuery(key,true)
@@ -157,12 +161,17 @@ class SearchActivity : AppCompatActivity() {
         }
 
         override fun error(code: Int, msg: String) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
 
         override fun failure(msg: String) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item!!.itemId){
+            android.R.id.home -> finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

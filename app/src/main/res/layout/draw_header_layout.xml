@@ -29,6 +29,7 @@ android:background="#ffffff">
                 android:layout_marginLeft="@dimen/padding_middle"
         >
             <ImageView
+                    android:id="@+id/iv_avatar"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:src="@drawable/avatar"
@@ -60,7 +61,7 @@ android:background="#ffffff">
         <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/avatar"
+                android:src="@drawable/collect"
         />
 
         <TextView
@@ -86,7 +87,7 @@ android:background="#ffffff">
         <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/avatar"
+                android:src="@drawable/website"
         />
 
         <TextView
@@ -111,7 +112,7 @@ android:background="#ffffff">
         <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/avatar"
+                android:src="@drawable/todo"
         />
 
         <TextView
@@ -136,7 +137,7 @@ android:background="#ffffff">
         <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/avatar"
+                android:src="@drawable/setting"
         />
 
         <TextView
@@ -160,7 +161,7 @@ android:background="#ffffff">
         <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/avatar"
+                android:src="@drawable/about"
         />
 
         <TextView

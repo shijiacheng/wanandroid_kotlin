@@ -8,6 +8,13 @@
         android:orientation="vertical"
         tools:context=".ui.systemtree.SystemTreeListActivity">
 
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"/>
+
+
     <android.support.design.widget.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="fill_parent"

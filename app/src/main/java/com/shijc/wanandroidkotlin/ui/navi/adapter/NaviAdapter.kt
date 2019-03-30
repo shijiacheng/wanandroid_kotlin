@@ -10,6 +10,7 @@ import android.widget.TextView
 import com.google.android.flexbox.FlexboxLayout
 import com.shijc.wanandroidkotlin.R
 import com.shijc.wanandroidkotlin.ui.navi.bean.NaviResult
+import com.shijc.wanandroidkotlin.utils.UIhelper
 
 /**
  * @Package com.shijc.wanandroidkotlin.ui.systemtree.adapter
@@ -35,11 +36,14 @@ class NaviAdapter(private val context:Context, private val data:List<NaviResult.
             var textView = TextView(context)
             textView.text= item.title
             textView.setBackgroundResource(R.drawable.bg_shape_rectangle_gray)
-            textView.setPadding(10,10,10,10)
+            textView.setPadding(40,15,40,15)
 
             var params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT)
             params.setMargins(10,10,10,10)
             textView.layoutParams = params
+            textView.setOnClickListener {
+                UIhelper.openWebView(context,item.link)
+            }
             holder.flexboxLayout.addView(textView)
         }
 
@@ -49,5 +53,6 @@ class NaviAdapter(private val context:Context, private val data:List<NaviResult.
         var flexboxLayout: FlexboxLayout = view.findViewById(R.id.fbl_container)
         var tvTitle:TextView = view.findViewById(R.id.tv_title)
     }
+
 
 }

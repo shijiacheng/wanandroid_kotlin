@@ -3,16 +3,16 @@ package com.shijc.wanandroidkotlin.ui
 import android.graphics.Bitmap
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
-import android.util.Log
 import android.view.KeyEvent
+import android.view.MenuItem
 import android.view.View
 import android.webkit.*
 import android.widget.ProgressBar
-import android.widget.Toast
 import com.shijc.wanandroidkotlin.R
+import com.shijc.wanandroidkotlin.common.mvp.BaseActivity
+import kotlinx.android.synthetic.main.activity_webview.*
 
-class WebviewActivity : AppCompatActivity() {
+class WebviewActivity : BaseActivity() {
 
     private lateinit var webView: WebView
     private lateinit var progressBar: ProgressBar
@@ -28,6 +28,10 @@ class WebviewActivity : AppCompatActivity() {
         if (bundle!=null){
             url = bundle.getString("url")
         }
+
+        setSupportActionBar(tool_bar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true);//左侧添加一个默认的返回图标
+        supportActionBar?.setHomeButtonEnabled(true); //设置返回键可用
 
         progressBar = findViewById(R.id.progressbar)//进度条
 
@@ -62,6 +66,11 @@ class WebviewActivity : AppCompatActivity() {
             super.onPageStarted(view, url, favicon)
             progressBar.visibility = View.VISIBLE
         }
+
+        override fun onPageFinished(view: WebView?, url: String?) {
+            super.onPageFinished(view, url)
+            tool_bar.title = view!!.title
+        }
     }
 
     inner class MyWebChromeClient :WebChromeClient(){
@@ -72,6 +81,7 @@ class WebviewActivity : AppCompatActivity() {
             }
             super.onProgressChanged(view, newProgress)
         }
+
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
@@ -82,6 +92,13 @@ class WebviewActivity : AppCompatActivity() {
         return super.onKeyDown(keyCode, event)
     }
 
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item!!.itemId){
+            android.R.id.home -> finish()
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun onDestroy() {
         super.onDestroy()

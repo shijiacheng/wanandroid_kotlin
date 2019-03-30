@@ -24,9 +24,12 @@ import kotlinx.android.synthetic.main.activity_todo.*
 import java.util.*
 import com.shijc.wanandroidkotlin.widget.TodoAddDialog
 import android.support.v4.app.FragmentTransaction
+import android.view.MenuItem
+import com.shijc.wanandroidkotlin.common.base.SimpleDividerItemDecoration
+import com.shijc.wanandroidkotlin.common.mvp.BaseActivity
 
 
-class TodoActivity : AppCompatActivity() {
+class TodoActivity : BaseActivity() {
 
     private val list = ArrayList<TreeNode<*>>()
 
@@ -55,8 +58,9 @@ class TodoActivity : AppCompatActivity() {
 
 
         setSupportActionBar(tool_bar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setHomeButtonEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true);//左侧添加一个默认的返回图标
+        supportActionBar?.setHomeButtonEnabled(true); //设置返回键可用
+
 
 
         fab_add.setOnClickListener {
@@ -71,8 +75,7 @@ class TodoActivity : AppCompatActivity() {
         )
 
         //添加自定义分割线
-        val divider = DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
-        recycler_view.addItemDecoration(divider)
+        recycler_view.addItemDecoration(SimpleDividerItemDecoration(this))
 
         adapter.setOnTreeNodeListener(object :TreeViewAdapter.OnTreeNodeListener{
             override fun onClick(node: TreeNode<*>?, holder: RecyclerView.ViewHolder?): Boolean {
@@ -241,5 +244,13 @@ class TodoActivity : AppCompatActivity() {
 
             }
         })
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item!!.itemId){
+            android.R.id.home -> finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

@@ -5,13 +5,17 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.website.WebsiteActivity">
+        tools:context=".ui.website.WebsiteActivity"
+android:background="@color/white">
 
     <android.support.v7.widget.Toolbar
             android:id="@+id/tool_bar"
             android:layout_width="match_parent"
             android:background="?attr/colorPrimary"
-                                       android:layout_height="?attr/actionBarSize">
+            android:layout_height="?attr/actionBarSize"
+            app:titleTextColor="@color/mainText"
+            app:title="常用网站"
+    >
 
     </android.support.v7.widget.Toolbar>
 
@@ -36,6 +40,6 @@
             android:layout_alignParentRight="true"
             android:layout_marginBottom="16dp"
             android:layout_marginRight="16dp"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@drawable/add"/>
 
 </RelativeLayout>

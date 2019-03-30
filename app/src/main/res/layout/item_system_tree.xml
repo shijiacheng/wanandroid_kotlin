@@ -4,6 +4,7 @@
               android:orientation="horizontal"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:background="@color/white"
               android:gravity="center"
 >
 
@@ -19,7 +20,7 @@
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="这是标题"
+                android:text=""
                 android:textColor="@color/mainText"
                 android:textSize="@dimen/font_h4"
 
@@ -41,9 +42,9 @@
     </LinearLayout>
 
     <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@android:drawable/sym_action_call"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/arrow_right"
             android:layout_marginRight="@dimen/padding_middle"
     />
 

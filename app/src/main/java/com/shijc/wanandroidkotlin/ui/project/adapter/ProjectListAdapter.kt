@@ -13,6 +13,7 @@ import com.google.android.flexbox.FlexboxLayout
 import com.shijc.wanandroidkotlin.R
 import com.shijc.wanandroidkotlin.ui.home.bean.ArticleModel
 import com.shijc.wanandroidkotlin.utils.TimeUtils
+import com.shijc.wanandroidkotlin.utils.UIhelper
 
 /**
  * @Package com.shijc.wanandroidkotlin.ui.systemtree.adapter
@@ -38,6 +39,9 @@ class ProjectListAdapter(private val context:Context, private val data:List<Arti
         holder.tvAuthor.text = data[position].author
         holder.tvTime.text = TimeUtils.long2String(data[position].publishTime,TimeUtils.FORMAT_TYPE_1)
 
+        holder.itemView.setOnClickListener {
+            UIhelper.openWebView(context,data[position].link)
+        }
     }
 
     inner class ProjectListViewHolder(view: View):RecyclerView.ViewHolder(view){

@@ -37,7 +37,9 @@ class SystemTreeListAdapter(private val context:Context, private val data:List<A
             holder?.tvClassify?.text = data[position].superChapterName
 
             holder.itemView.setOnClickListener {
-                Toast.makeText(context, "click", Toast.LENGTH_SHORT).show()
+                if (listener!=null){
+                    listener!!.onItemClick(data[position],position,it)
+                }
             }
         }
     }
@@ -47,6 +49,12 @@ class SystemTreeListAdapter(private val context:Context, private val data:List<A
         var tvTime: TextView = view.findViewById(R.id.tv_time)
         var tvContent: TextView = view.findViewById(R.id.tv_content)
         var tvClassify: TextView = view.findViewById(R.id.tv_classify)
+    }
+
+    var listener:ClickListener? = null
+
+    interface ClickListener{
+        fun onItemClick(item: ArticleModel, position:Int, view: View)
     }
 
 }

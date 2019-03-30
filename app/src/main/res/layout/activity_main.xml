@@ -19,10 +19,11 @@
                 android:background="?colorPrimary"
                 android:minHeight="?android:actionBarSize"
                 android:elevation="4dp"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
                 app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:title="首页"
-                app:navigationIcon="@mipmap/ic_launcher"
+                app:titleTextColor="@color/mainText"
+                app:navigationIcon="@drawable/menu"
         />
 
         <LinearLayout

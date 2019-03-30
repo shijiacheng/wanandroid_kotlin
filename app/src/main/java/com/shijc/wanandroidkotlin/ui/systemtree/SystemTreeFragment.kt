@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.jcodecraeer.xrecyclerview.XRecyclerView
 import com.shijc.wanandroidkotlin.R
+import com.shijc.wanandroidkotlin.common.base.SimpleDividerItemDecoration
 import com.shijc.wanandroidkotlin.ui.systemtree.adapter.SystemTreeAdapter
 import com.shijc.wanandroidkotlin.ui.systemtree.bean.SystemTreeResult
 import com.shijc.wanandroidkotlin.ui.systemtree.bean.SystemTreeTitleModel
@@ -49,6 +50,7 @@ class SystemTreeFragment  : Fragment() {
 
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.addItemDecoration(SimpleDividerItemDecoration(context))
         adapter = SystemTreeAdapter(context!!,datas)
         recyclerView.adapter = adapter
         adapter.listener = object :SystemTreeAdapter.ClickListener{
@@ -60,6 +62,7 @@ class SystemTreeFragment  : Fragment() {
                     list.add(SystemTreeTitleModel(i.id,i.name))
                 }
                 bundle.putSerializable("treeData",list)
+                bundle.putString("title",item.name)
                 intent.putExtras(bundle)
                 startActivity(intent)
             }

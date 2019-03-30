@@ -11,6 +11,7 @@ import android.widget.Toast
 import com.shijc.wanandroidkotlin.R
 import com.shijc.wanandroidkotlin.ui.home.bean.ArticleModel
 import com.shijc.wanandroidkotlin.utils.TimeUtils
+import com.shijc.wanandroidkotlin.utils.UIhelper
 
 /**
  * @Description:
@@ -36,7 +37,7 @@ class CollectionAdapter(private val context:Context, private val data:List<Artic
             holder?.tvClassify?.text = data[position].superChapterName
 
             holder.itemView.setOnClickListener {
-                Toast.makeText(context, "click", Toast.LENGTH_SHORT).show()
+                UIhelper.openWebView(context,data[position].link)
             }
         }
     }

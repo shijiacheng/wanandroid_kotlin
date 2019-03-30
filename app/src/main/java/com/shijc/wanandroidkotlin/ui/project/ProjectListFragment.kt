@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.jcodecraeer.xrecyclerview.XRecyclerView
 import com.shijc.wanandroidkotlin.R
+import com.shijc.wanandroidkotlin.common.base.SimpleDividerItemDecoration
 import com.shijc.wanandroidkotlin.ui.home.bean.ArticleModel
 import com.shijc.wanandroidkotlin.ui.project.adapter.ProjectListAdapter
 import com.shijc.wanandroidkotlin.ui.project.mvp.ProjectListContract
@@ -55,6 +56,7 @@ class ProjectListFragment  : Fragment() {
 
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.addItemDecoration(SimpleDividerItemDecoration(context))
         adapter = ProjectListAdapter(context!!,mDatas)
         recyclerView.adapter = adapter
         recyclerView.setLoadingListener(object : XRecyclerView.LoadingListener{

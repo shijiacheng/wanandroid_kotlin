@@ -3,27 +3,27 @@
 
     <item
         android:id="@+id/bottom_navigation_home"
-        android:icon="@android:drawable/ic_menu_add"
+        android:icon="@drawable/index"
         android:title="首页" />
 
     <item
         android:id="@+id/bottom_navigation_systemtree"
-        android:icon="@android:drawable/ic_menu_add"
+        android:icon="@drawable/system"
         android:title="体系" />
 
     <item
         android:id="@+id/bottom_navigation_wxarticle"
-        android:icon="@android:drawable/ic_menu_add"
+        android:icon="@drawable/weixin"
         android:title="公众号" />
 
     <item
         android:id="@+id/bottom_navigation_navi"
-        android:icon="@android:drawable/ic_menu_add"
+        android:icon="@drawable/navi"
         android:title="导航" />
 
     <item
         android:id="@+id/bottom_navigation_project"
-        android:icon="@android:drawable/ic_menu_add"
+        android:icon="@drawable/project"
         android:title="项目" />
 
 </menu>

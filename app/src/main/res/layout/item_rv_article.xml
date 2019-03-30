@@ -5,6 +5,7 @@
               android:layout_height="wrap_content"
               android:paddingLeft="16dp"
               android:paddingRight="16dp"
+              android:background="@color/white"
 >
 
     <LinearLayout
@@ -56,25 +57,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="@dimen/padding_middle">
+            android:layout_marginTop="@dimen/padding_middle"
+    android:layout_marginBottom="@dimen/padding_middle">
         <TextView
                 android:id="@+id/tv_classify"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="sjokoacjemg"
+                android:text=""
                 android:textSize="@dimen/font_h5"
                 android:textColor="@color/mainTextGray"
                 android:lines="1"
         />
 
     </LinearLayout>
-
-    <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/hr"
-            android:layout_marginTop="@dimen/padding_middle"
-
-    />
 
 </LinearLayout>
