@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import com.shijc.wanandroidkotlin.R;
+import com.shijc.wanandroidkotlin.common.constant.Constant;
 import com.shijc.wanandroidkotlin.common.interceptor.AddCookiesInterceptor;
 import com.shijc.wanandroidkotlin.common.interceptor.ReceivedCookiesInterceptor;
 import com.shijc.wanandroidkotlin.utils.NetworkUtils;
@@ -30,9 +31,9 @@ import retrofit2.Retrofit;
 public class HttpClient {
 
     /*用户设置的BASE_URL*/
-    private static String BASE_URL = "";
-    /*本地使用的baseUrl*/
-    private String baseUrl = "";
+    private static String BASE_URL = Constant.REQUEST_BASE_URL;
+//    /*本地使用的baseUrl*/
+//    private String baseUrl = "";
     private static OkHttpClient okHttpClient;
     private Builder mBuilder;
     private Retrofit retrofit;
@@ -77,13 +78,15 @@ public class HttpClient {
      * 引起Retrofit变化的因素只有静态变量BASE_URL的改变。
      */
     private void getRetrofit() {
-        if (!BASE_URL.equals(baseUrl) || retrofit == null) {
-            baseUrl = BASE_URL;
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(baseUrl)
-                    .client(okHttpClient)
-                    .build();
-        }
+//        if (!BASE_URL.equals(baseUrl) || retrofit == null) {
+//            baseUrl = BASE_URL;
+//
+//        }
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .client(okHttpClient)
+                .build();
     }
 
     public void post(final OnResultListener onResultListener) {
